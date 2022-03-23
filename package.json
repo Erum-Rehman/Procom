@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yasirhussain224466/Procom/issues"
   },
-  "homepage": "https://github.com/yasirhussain224466/Procom#readme"
+  "homepage": "https://github.com/yasirhussain224466/Procom#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
