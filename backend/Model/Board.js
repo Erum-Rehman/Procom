@@ -61,9 +61,7 @@ const Board = mongoose.Schema({
       ],
     },
   ],
-  AddMember: {
-    type: String,
-  },
+ 
   status: String,
 });
 
