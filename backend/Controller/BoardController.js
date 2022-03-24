@@ -1,7 +1,7 @@
 const Board = require("../Model/Board");
-const APIFeatures = require("../Utils/BoardAPIFeatures.js");
+const APIFeatures = require("../Utils/APIFeatures.js");
 const CatchAsync = require("../Utils/CatchAsync");
-const AppError = require("../Utils/ErrorHandler")
+const AppError = require("../Utils/ErrorHandler");
 
 exports.createBoard = CatchAsync(async (req, res, next) => {
   req.body.user = req.user._id;
@@ -9,11 +9,22 @@ exports.createBoard = CatchAsync(async (req, res, next) => {
   res.status(201).json({
     status: "success",
     data: {
-      whoCreated: req.body.user,
+      whoCreateBoard: req.body.user,
       Board: newBoard,
     },
   });
 });
+
+exports.getBoardDetails = CatchAsync(async (req, res, next) => {
+    const boardDetails = await Board.findById(req.params.id);
+    if (!boardDetails) {
+      return next(new AppError("No Product found with that ID", 404));
+    }
+    res.status(200).json({
+      status: "success",
+      data: boardDetails,
+    });
+  });
 
 exports.getAllBorads = CatchAsync(async (req, res, next) => {
   const Boards = await Board.find();
@@ -24,38 +35,13 @@ exports.getAllBorads = CatchAsync(async (req, res, next) => {
   });
 });
 
-exports.getBoardDetails = CatchAsync(async (req, res, next) => {
-    const boardQuery = new APIFeatures(Board.findById(req.params.id), req.query)
-    .filter()
-    .limitFields()
-    .paginate()
-    .search()
-    .sort();
-    const boardDetails = await boardQuery.query;
-    if (!boardDetails) {
-      return next(new AppError("No Product found with that ID", 404));
-    }
-    res.status(200).json({
-      status: "success",
-      data: boardDetails,
-    });
+exports.DeleteBoard = CatchAsync(async (req, res, next) => {
+  const deleteBoard = await Board.findByIdAndRemove(req.params.id);
+  if (!deleteBoard) {
+    return next(new AppError("No Product found with that ID", 404));
+  }
+  res.status(204).json({
+    status: "success",
+    data: deleteBoard,
   });
-
-  exports.updateBoard = CatchAsync(async (req, res, next) => {
-    const updatedBoard = await Board.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    if (!updatedBoard) {
-      return next(new AppError("No Product found with that ID", 404));
-    } else {
-      res.status(200).json({
-        status: "success",
-        data: updatedBoard,
-      });
-    }
-  });
+});

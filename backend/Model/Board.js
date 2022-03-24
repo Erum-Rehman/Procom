@@ -1,9 +1,4 @@
 const mongoose = require("mongoose");
-const { type } = require("os");
-// const validator = require("validator");
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-// const crypto = require("crypto");
 
 const Board = mongoose.Schema({
   title: {
@@ -19,46 +14,8 @@ const Board = mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-  task: {
-    Todo: [
-      {
-        title: String,
-        description: String,
-        priority: String,
-        assignee: String,
-        Status: String,
-      },
-    ],
-
-    progress: [
-      {
-        title: String,
-        description: String,
-        priority: String,
-        assignee: String,
-        Status: String,
-      },
-    ],
-
-    codeReview: [
-      {
-        title: String,
-        description: String,
-        priority: String,
-        assignee: String,
-        Status: String,
-      },
-    ],
-
-    done: [
-      {
-        title: String,
-        description: String,
-        priority: String,
-        assignee: String,
-        Status: String,
-      },
-    ],
+  addMember: {
+    type: String,
   },
 });
 
