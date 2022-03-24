@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const { type } = require("os");
+
 // const validator = require("validator");
 // const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
 // const crypto = require("crypto");
 
-const Board = mongoose.Schema({
+const card = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please provide the BOARD titlte!"],
@@ -62,4 +62,4 @@ const Board = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Board", Board);
+module.exports = mongoose.model("card", card);
