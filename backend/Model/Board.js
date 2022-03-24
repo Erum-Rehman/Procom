@@ -27,6 +27,7 @@ const Board = mongoose.Schema({
           description: String,
           priority: String,
           assignee: String,
+          Status:String
         },
       ],
     },
@@ -37,6 +38,8 @@ const Board = mongoose.Schema({
           description: String,
           priority: String,
           assignee: String,
+          Status:String
+
         },
       ],
     },
@@ -47,6 +50,8 @@ const Board = mongoose.Schema({
           description: String,
           priority: String,
           assignee: String,
+          Status:String
+
         },
       ],
     },
@@ -57,12 +62,13 @@ const Board = mongoose.Schema({
           description: String,
           priority: String,
           assignee: String,
+          Status:String
+
         },
       ],
     },
   ],
  
-  status: String,
 });
 
 module.exports = mongoose.model("Board", Board);
