@@ -54,8 +54,8 @@ exports.getAllCards = CatchAsync(async (req, res, next) => {
     .limitFields()
     .search()
     .sort();
+
   const cards = await cardQuery.query;
-  console.log(req.query);
   res.status(200).json({
     status: "success",
     items: `${cards.length}`,

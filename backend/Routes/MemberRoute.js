@@ -1,8 +1,10 @@
 const express = require("express");
-const { getAllUsers } = require("../Controller/UserController");
+const { createMember, getMembers } = require("../Controller/MemberController");
+const { protect } = require("../Controller/AuthController");
 
 const router = express.Router();
 
-router.route("/allUsers").get(getAllUsers);
+router.route("/createMember/:M_id").post(protect, createMember);
+router.route("/getMembers").get(protect, getMembers);
 
 module.exports = router;

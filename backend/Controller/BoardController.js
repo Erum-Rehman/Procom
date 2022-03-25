@@ -5,7 +5,11 @@ const AppError = require("../Utils/ErrorHandler");
 
 exports.createBoard = CatchAsync(async (req, res, next) => {
   req.body.user = req.user._id;
-  const newBoard = await Board.create(req.body);
+  const newBoard = await Board.create({
+    title: req.body.title,
+    description: req.body.description,
+    addMember: req.body.addMember,
+  });
   res.status(201).json({
     status: "success",
     data: {
@@ -16,15 +20,15 @@ exports.createBoard = CatchAsync(async (req, res, next) => {
 });
 
 exports.getBoardDetails = CatchAsync(async (req, res, next) => {
-    const boardDetails = await Board.findById(req.params.id);
-    if (!boardDetails) {
-      return next(new AppError("No Product found with that ID", 404));
-    }
-    res.status(200).json({
-      status: "success",
-      data: boardDetails,
-    });
+  const boardDetails = await Board.findById(req.params.id);
+  if (!boardDetails) {
+    return next(new AppError("No Product found with that ID", 404));
+  }
+  res.status(200).json({
+    status: "success",
+    data: boardDetails,
   });
+});
 
 exports.getAllBorads = CatchAsync(async (req, res, next) => {
   const Boards = await Board.find();

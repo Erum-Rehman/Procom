@@ -5,7 +5,8 @@ const cors = require("cors");
 const UserAuthentication = require("./Routes/AuthRoute");
 const BoardRoute = require("./Routes/BoardRoute");
 const MemberRoute = require("./Routes/MemberRoute");
-const CardRoute = require("./Routes/CardRoute")
+const UserRoute = require("./Routes/UserRoute");
+const CardRoute = require("./Routes/CardRoute");
 const GlobalErrorHandler = require("./Controller/ErrorController");
 const AppError = require("./Utils/ErrorHandler");
 const app = express();
@@ -20,9 +21,10 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1/user", UserAuthentication);
-app.use("api/v1", MemberRoute);
+app.use("/api/v1", MemberRoute);
 app.use("/api/v1", BoardRoute);
-app.use('/api/v1', CardRoute)
+app.use("/api/v1", CardRoute);
+app.use("/api/v1", UserRoute);
 
 app.all("*", (req, res, next) => {
   // console.log("Wrong Url")
