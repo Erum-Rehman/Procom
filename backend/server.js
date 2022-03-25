@@ -1,6 +1,6 @@
 //handled uncought exeption
 process.on("uncaughtException", (err) => {
-  console.log(`Error:${err.message}`);
+  console.log(`Error:${err}`);
   console.log("Shutting down the server due to uncought exeption error");
   process.exit(1);
 });
